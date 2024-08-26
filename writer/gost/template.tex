@@ -1,4 +1,4 @@
-% Sets the base style of the document.
+% It sets the base style of the document.
 % Class extarticle is class article with extra font size options, such as 14pt.
 %
 % Russian is set in the document class options and not in the package options of
@@ -27,7 +27,7 @@
 }
 \makeatother
 
-% Defines Russian cyrillic letters for XeTeX and LuaTeX.
+% It defines Russian cyrillic letters for XeTeX and LuaTeX.
 % They are used by packages that don't support Unicode.
 % Packages that are known to not support Unicode: cleveref.
 % See https://tex.stackexchange.com/a/455124.
@@ -104,38 +104,35 @@
 
 % Document
 
-% Sets the language.
+% It sets the language.
 % Option russian (implicitly set by \documentclass) specifies the language of the document.
 % Many packages use the currently active language for things like localized strings.
 \usepackage[shorthands=off]{babel}
 
-% Sets the page layout.
+% It sets the page layout.
 \usepackage{geometry}
 \geometry{paper=a4paper}
 \geometry{left=3cm,right=1cm,top=2cm,bottom=2cm}
 
-
-% Text
-
-% Sets the fonts.
+% It sets the fonts.
 \usepackage{fontspec}
 \setmainfont{XITS}     % open source Times New Roman
 \setmonofont{FreeMono} % open source Courier New
 
-% Sets the first line indent of a paragraph.
+% It sets the first line indent of a paragraph.
 \usepackage{indentfirst}
 \setlength\parindent{1.25cm}
 
-% Sets the line spacing to Microsoft Word's 1.5.
-\linespread{1.424}
+% It sets the line spacing.
+\linespread{1.424} % Microsoft Word's 1.5
 
-% Justifies text.
+% It justifies text.
 \tolerance=1
 \emergencystretch=\maxdimen
 \hbadness=10000
 \frenchspacing
 
-% Disables hyphenation.
+% It disables hyphenation.
 \makeatletter
 \template@hyphenation@disable
 \makeatother
