@@ -1,0 +1,217 @@
+% Sets the base style of the document.
+% Class extarticle is class article with extra font size options, such as 14pt.
+%
+% Russian is set in the document class options and not in the package options of
+% babel because LaTeX automatically passes class options to every loaded package
+% which causes the appropriate language support to be enabled in every package
+% that supports it.
+\documentclass[14pt,russian]{extarticle}
+
+% See https://tex.stackexchange.com/a/52009.
+\makeatletter
+\newcommand{\template@hyphenation@enable}{%
+  \hyphenpenalty=50%
+  \exhyphenpenalty=50%
+}
+\newcommand{\template@hyphenation@disable}{%
+  \hyphenpenalty=10000%
+  \exhyphenpenalty=10000%
+}
+\newcommand{\template@hyphenation@save}{%
+  \mathchardef\template@hyphenation@internal@hyphenpenalty=\hyphenpenalty%
+  \mathchardef\template@hyphenation@internal@exhyphenpenalty=\exhyphenpenalty%
+}
+\newcommand{\template@hyphenation@restore}{%
+  \hyphenpenalty=\template@hyphenation@internal@hyphenpenalty%
+  \exhyphenpenalty=\template@hyphenation@internal@exhyphenpenalty%
+}
+\makeatother
+
+% Define Russian cyrillic letters for XeTeX and LuaTeX.
+% They are used by packages that don't support Unicode.
+% Packages that are known to not support Unicode: cleveref.
+% See https://tex.stackexchange.com/a/455124.
+\DeclareTextSymbol{\CYRA}\UnicodeEncodingName{"0410}      % А
+\DeclareTextSymbol{\cyra}\UnicodeEncodingName{"0430}      % а
+\DeclareTextSymbol{\CYRB}\UnicodeEncodingName{"0411}      % Б
+\DeclareTextSymbol{\cyrb}\UnicodeEncodingName{"0431}      % б
+\DeclareTextSymbol{\CYRV}\UnicodeEncodingName{"0412}      % В 
+\DeclareTextSymbol{\cyrv}\UnicodeEncodingName{"0432}      % в
+\DeclareTextSymbol{\CYRG}\UnicodeEncodingName{"0413}      % Г
+\DeclareTextSymbol{\cyrg}\UnicodeEncodingName{"0433}      % г
+\DeclareTextSymbol{\CYRD}\UnicodeEncodingName{"0414}      % Д
+\DeclareTextSymbol{\cyrd}\UnicodeEncodingName{"0434}      % д
+\DeclareTextSymbol{\CYRE}\UnicodeEncodingName{"0415}      % Е 
+\DeclareTextSymbol{\cyre}\UnicodeEncodingName{"0435}      % е
+\DeclareTextSymbol{\CYRYO}\UnicodeEncodingName{"0401}     % Ё
+\DeclareTextSymbol{\cyryo}\UnicodeEncodingName{"0451}     % ё
+\DeclareTextSymbol{\CYRZH}\UnicodeEncodingName{"0416}     % Ж 
+\DeclareTextSymbol{\cyrzh}\UnicodeEncodingName{"0436}     % ж
+\DeclareTextSymbol{\CYRZ}\UnicodeEncodingName{"0417}      % З
+\DeclareTextSymbol{\cyrz}\UnicodeEncodingName{"0437}      % з
+\DeclareTextSymbol{\CYRI}\UnicodeEncodingName{"0418}      % И
+\DeclareTextSymbol{\cyri}\UnicodeEncodingName{"0438}      % и
+\DeclareTextSymbol{\CYRISHRT}\UnicodeEncodingName{"0419}  % Й
+\DeclareTextSymbol{\cyrishrt}\UnicodeEncodingName{"0439}  % й
+\DeclareTextSymbol{\CYRK}\UnicodeEncodingName{"041A}      % К
+\DeclareTextSymbol{\cyrk}\UnicodeEncodingName{"043A}      % к
+\DeclareTextSymbol{\CYRL}\UnicodeEncodingName{"041B}      % Л
+\DeclareTextSymbol{\cyrl}\UnicodeEncodingName{"043B}      % л 
+\DeclareTextSymbol{\CYRM}\UnicodeEncodingName{"041C}      % М
+\DeclareTextSymbol{\cyrm}\UnicodeEncodingName{"043C}      % м
+\DeclareTextSymbol{\CYRN}\UnicodeEncodingName{"041D}      % Н
+\DeclareTextSymbol{\cyrn}\UnicodeEncodingName{"043D}      % н
+\DeclareTextSymbol{\CYRO}\UnicodeEncodingName{"041E}      % О
+\DeclareTextSymbol{\cyro}\UnicodeEncodingName{"043E}      % о
+\DeclareTextSymbol{\CYRP}\UnicodeEncodingName{"041F}      % П
+\DeclareTextSymbol{\cyrp}\UnicodeEncodingName{"043F}      % п
+\DeclareTextSymbol{\CYRR}\UnicodeEncodingName{"0420}      % Р
+\DeclareTextSymbol{\cyrr}\UnicodeEncodingName{"0440}      % р
+\DeclareTextSymbol{\CYRS}\UnicodeEncodingName{"0421}      % С
+\DeclareTextSymbol{\cyrs}\UnicodeEncodingName{"0441}      % с
+\DeclareTextSymbol{\CYRT}\UnicodeEncodingName{"0422}      % Т
+\DeclareTextSymbol{\cyrt}\UnicodeEncodingName{"0442}      % т
+\DeclareTextSymbol{\CYRU}\UnicodeEncodingName{"0423}      % У
+\DeclareTextSymbol{\cyru}\UnicodeEncodingName{"0443}      % у
+\DeclareTextSymbol{\CYRF}\UnicodeEncodingName{"0424}      % Ф
+\DeclareTextSymbol{\cyrf}\UnicodeEncodingName{"0444}      % ф
+\DeclareTextSymbol{\CYRH}\UnicodeEncodingName{"0425}      % Х
+\DeclareTextSymbol{\cyrh}\UnicodeEncodingName{"0445}      % х
+\DeclareTextSymbol{\CYRC}\UnicodeEncodingName{"0426}      % Ц
+\DeclareTextSymbol{\cyrc}\UnicodeEncodingName{"0446}      % ц
+\DeclareTextSymbol{\CYRCH}\UnicodeEncodingName{"0427}     % Ч
+\DeclareTextSymbol{\cyrch}\UnicodeEncodingName{"0447}     % ч
+\DeclareTextSymbol{\CYRSH}\UnicodeEncodingName{"0428}     % Ш
+\DeclareTextSymbol{\cyrsh}\UnicodeEncodingName{"0448}     % ш
+\DeclareTextSymbol{\CYRSHCH}\UnicodeEncodingName{"0429}   % Щ
+\DeclareTextSymbol{\cyrshch}\UnicodeEncodingName{"0449}   % щ
+\DeclareTextSymbol{\CYRHRDSN}\UnicodeEncodingName{"042A}  % Ъ
+\DeclareTextSymbol{\cyrhrdsn}\UnicodeEncodingName{"044A}  % ъ
+\DeclareTextSymbol{\CYRERY}\UnicodeEncodingName{"042B}    % Ы
+\DeclareTextSymbol{\cyrery}\UnicodeEncodingName{"044B}    % ы
+\DeclareTextSymbol{\CYRSFTSN}\UnicodeEncodingName{"042C}  % Ь
+\DeclareTextSymbol{\cyrsftsn}\UnicodeEncodingName{"044C}  % ь
+\DeclareTextSymbol{\CYREREV}\UnicodeEncodingName{"042D}   % Э
+\DeclareTextSymbol{\cyrerev}\UnicodeEncodingName{"044D}   % э
+\DeclareTextSymbol{\CYRYU}\UnicodeEncodingName{"042E}     % Ю
+\DeclareTextSymbol{\cyryu}\UnicodeEncodingName{"044E}     % ю
+\DeclareTextSymbol{\CYRYA}\UnicodeEncodingName{"042F}     % Я
+\DeclareTextSymbol{\cyrya}\UnicodeEncodingName{"044F}     % я
+\DeclareTextSymbol{\cyrdash}\UnicodeEncodingName{"2014}   % punctuation
+\DeclareTextSymbol{\cyrlangle}\UnicodeEncodingName{"27E8} % punctuation
+\DeclareTextSymbol{\cyrrangle}\UnicodeEncodingName{"27E9} % punctuation
+
+
+% Language
+
+% Package babel is known to use the "russian" document class option.
+\usepackage[shorthands=off]{babel}
+
+
+% Page
+
+\usepackage{geometry}
+\geometry{paper=a4paper}
+\geometry{left=3cm,right=1cm,top=2cm,bottom=2cm}
+
+
+% Font
+
+\usepackage{fontspec}
+\setmainfont{XITS}     % open source Times New Roman
+\setmonofont{FreeMono} % open source Courier New
+
+
+% Paragraph
+
+% Set the first line indent of a paragraph.
+\usepackage{indentfirst}
+\setlength\parindent{1.25cm}
+
+% Set the line spacing to Microsoft Word's 1.5.
+\linespread{1.424}
+
+% Justify text.
+\tolerance=1
+\emergencystretch=\maxdimen
+\hbadness=10000
+\frenchspacing
+
+% Disable hyphenation.
+\makeatletter
+\template@hyphenation@disable
+\makeatother
+
+
+% Text
+
+% Package csquotes provides \enquote for language-aware quoting.
+% \enquote is used by Pandoc for Quoted when "csquotes" metadata variable is true.
+% csquotes is used by package biblatex.
+\usepackage{csquotes}
+
+
+% Link
+
+% Package cleveref is known to use the "russian" document class option.
+\usepackage{cleveref}
+
+
+% Image
+
+% Package graphicx provides \includegraphics for inserting images.
+% Pandoc uses \includegraphics for Image.
+% See https://www.overleaf.com/learn/latex/Inserting_Images.
+\usepackage{graphicx}
+
+% Set default image width and height.
+% If image fits, it has original size.
+% If image doesn't fit, it is constrained by \template@image@width and \template@image@height.
+% Extremely narrow images overflow, you should set their height manually.
+\makeatletter
+\def\template@image@width{0.75\linewidth}   % 75% width of the line in the current environment
+\def\template@image@height{1.00\textheight} % 100% height of the text area in the page
+\def\template@image@internal@width{\ifdim\Gin@nat@width>\template@image@width \template@image@width\else\Gin@nat@width\fi}
+\def\template@image@internal@height{\ifdim\Gin@nat@height>\template@image@height \template@image@height\else\Gin@nat@height\fi}
+\setkeys{Gin}{width=\template@image@internal@width,height=\template@image@internal@height,keepaspectratio}
+\makeatother
+
+
+% Code block
+
+\usepackage{caption}
+
+\usepackage[outputdir=auxiliary]{minted}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+
+
+% Table
+
+% Package longtable provides longtable environment for tables that span multiple pages.
+% Pandoc uses longtable environment for Table.
+\usepackage{longtable}
+
+% Package booktabs provides \toprule and others for table formatting.
+% Pandoc uses \toprule and others for Table.
+\usepackage{booktabs}
+
+
+% Contents
+
+% Package tocloft provides \@starttoc.
+% writer/gost/internal/contents uses \@starttoc for the table of contents.
+\usepackage{tocloft}
+
+
+% References
+
+% Package tocloft provides \printbibliography.
+% writer/gost/internal/references uses \printbibliography for the list of references.
+\usepackage{biblatex}
+
+
+\begin{document}
+$body$
+\end{document}
