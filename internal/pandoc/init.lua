@@ -108,6 +108,7 @@ function Block:clone() end
 ---@field content pandoc.Blocks
 ---@field attr pandoc.Attr
 ---@field tag "Div"
+---@field clone fun(self: pandoc.Div): pandoc.Div
 ---@class pandoc.Figure: pandoc.Block
 ---@field content pandoc.Blocks
 ---@field caption pandoc.Caption
@@ -127,6 +128,7 @@ function Block:clone() end
 ---@field content pandoc.List<pandoc.Blocks>
 ---@field listAttributes pandoc.ListAttributes
 ---@field tag "OrderedList"
+---@field clone fun(self: pandoc.OrderedList): pandoc.OrderedList
 ---@class pandoc.Para: pandoc.Block
 ---@field content pandoc.Inlines
 ---@field tag "Para"

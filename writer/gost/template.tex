@@ -188,19 +188,28 @@
 \setlist[itemize]{label={$$\bullet$$}}
 
 % The commands set additional settings for ordered lists.
+% This label style isn't used by the writer, it is to be used by the end user in LaTeX if needed.
+% The writer uses Pandoc's tooling instead to style the label.
+% See writer/gost/internal/list.
 \setlist[enumerate,1]{label={\arabic*)}}
 \setlist[enumerate,2]{label={\asbuk*)}}
 \setlist[enumerate,3]{label={\arabic*)}}
 \setlist[enumerate,4]{label={\asbuk*)}}
 
-% The commands create ordered lists with parentheses based on regular ordered lists.
+% The commands create ordered list with parenthesis labels.
+% The list isn't used by the writer, it is to be used by the end user in LaTeX if needed.
+% The writer uses Pandoc's tooling instead.
+% See writer/gost/internal/list.
 \newlist{enumerateWithParenthesis}{enumerate}{10}
 \setlist[enumerateWithParenthesis,1]{label={\arabic*)}}
 \setlist[enumerateWithParenthesis,2]{label={\asbuk*)}}
 \setlist[enumerateWithParenthesis,3]{label={\arabic*)}}
 \setlist[enumerateWithParenthesis,4]{label={\asbuk*)}}
 
-% The commands create ordered lists with periods based on regular ordered lists.
+% The commands create ordered list with period labels.
+% The list isn't used by the writer, it is to be used by the end user in LaTeX if needed.
+% The writer uses Pandoc's tooling instead.
+% See writer/gost/internal/list.
 \newlist{enumerateWithPeriod}{enumerate}{10}
 \setlist[enumerateWithPeriod,1]{label={\arabic*.}}
 \setlist[enumerateWithPeriod,2]{label={\asbuk*.}}
