@@ -27,7 +27,7 @@
 }
 \makeatother
 
-% Define Russian cyrillic letters for XeTeX and LuaTeX.
+% Defines Russian cyrillic letters for XeTeX and LuaTeX.
 % They are used by packages that don't support Unicode.
 % Packages that are known to not support Unicode: cleveref.
 % See https://tex.stackexchange.com/a/455124.
@@ -102,14 +102,14 @@
 \DeclareTextSymbol{\cyrrangle}\UnicodeEncodingName{"27E9} % punctuation
 
 
-% Language
+% Document
 
-% Package babel is known to use the "russian" document class option.
+% Sets the language.
+% Option russian (implicitly set by \documentclass) specifies the language of the document.
+% Many packages use the currently active language for things like localized strings.
 \usepackage[shorthands=off]{babel}
 
-
-% Page
-
+% Sets the page layout.
 \usepackage{geometry}
 \geometry{paper=a4paper}
 \geometry{left=3cm,right=1cm,top=2cm,bottom=2cm}
@@ -117,25 +117,25 @@
 
 % Text
 
-% Set fonts.
+% Sets the fonts.
 \usepackage{fontspec}
 \setmainfont{XITS}     % open source Times New Roman
 \setmonofont{FreeMono} % open source Courier New
 
-% Set the first line indent of a paragraph.
+% Sets the first line indent of a paragraph.
 \usepackage{indentfirst}
 \setlength\parindent{1.25cm}
 
-% Set the line spacing to Microsoft Word's 1.5.
+% Sets the line spacing to Microsoft Word's 1.5.
 \linespread{1.424}
 
-% Justify text.
+% Justifies text.
 \tolerance=1
 \emergencystretch=\maxdimen
 \hbadness=10000
 \frenchspacing
 
-% Disable hyphenation.
+% Disables hyphenation.
 \makeatletter
 \template@hyphenation@disable
 \makeatother
