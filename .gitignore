@@ -1,0 +1,6 @@
+.*
+*~
+
+!/.gitignore
+!/.luarc.json
+!/.stylua.toml
