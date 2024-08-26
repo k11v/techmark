@@ -1,4 +1,4 @@
-% Sets the base style of the document.
+% It sets the base style of the document.
 % Class extarticle is class article with extra font size options, such as 14pt.
 %
 % Russian is set in the document class options and not in the package options of
@@ -27,7 +27,7 @@
 }
 \makeatother
 
-% Define Russian cyrillic letters for XeTeX and LuaTeX.
+% It defines Russian cyrillic letters for XeTeX and LuaTeX.
 % They are used by packages that don't support Unicode.
 % Packages that are known to not support Unicode: cleveref.
 % See https://tex.stackexchange.com/a/455124.
@@ -102,48 +102,58 @@
 \DeclareTextSymbol{\cyrrangle}\UnicodeEncodingName{"27E9} % punctuation
 
 
-% Language
+% Document
 
-% Package babel is known to use the "russian" document class option.
+% It sets the language.
+% Option russian (implicitly set by \documentclass) specifies the language of the document.
+% Many packages use the currently active language for things like localized strings.
 \usepackage[shorthands=off]{babel}
 
+% It sets Russian and English alphabets for letter-based counters.
+% It likely needs package babel.
+% The letters Ё, З, Й, О, Ч, Ъ, Ы, Ь are skipped.
+% See "ГОСТ Р 2.105-2019" p. 6.3.5.
+\makeatletter
+\def\russian@alph#1{\ifcase#1\or а\or б\or в\or г\or д\or е\or ж\or и\or к\or л\or м\or н\or п\or р\or с\or т\or у\or ф\or х\or ц\or ш\or щ\or э\or ю\or я\else\@ctrerr\fi}
+\def\russian@Alph#1{\ifcase#1\or А\or Б\or В\or Г\or Д\or Е\or Ж\or И\or К\or Л\or М\or Н\or П\or Р\or С\or Т\or У\or Ф\or Х\or Ц\or Ш\or Щ\or Э\or Ю\or Я\else\@ctrerr\fi}
+\makeatother
 
-% Page
+% It sets Russian and English alphabets for enumerations.
+% It likely needs package babel.
+% The letters I, O are skipped.
+% See "ГОСТ Р 2.105-2019" p. 6.3.5.
+\makeatletter
+\def\@alph#1{\ifcase#1\or a\or b\or c\or d\or e\or f\or g\or h\or j\or k\or l\or m\or n\or p\or q\or r\or s\or t\or u\or v\or w\or x\or y\or z\else\@ctrerr\fi}
+\def\@Alph#1{\ifcase#1\or A\or B\or C\or D\or E\or F\or G\or H\or J\or K\or L\or M\or N\or P\or Q\or R\or S\or T\or U\or V\or W\or X\or Y\or Z\else\@ctrerr\fi}
+\makeatother
 
+% It sets the page layout.
 \usepackage{geometry}
 \geometry{paper=a4paper}
 \geometry{left=3cm,right=1cm,top=2cm,bottom=2cm}
 
-
-% Font
-
+% It sets the fonts.
 \usepackage{fontspec}
 \setmainfont{XITS}     % open source Times New Roman
 \setmonofont{FreeMono} % open source Courier New
 
-
-% Paragraph
-
-% Set the first line indent of a paragraph.
+% It sets the first line indent of a paragraph.
 \usepackage{indentfirst}
 \setlength\parindent{1.25cm}
 
-% Set the line spacing to Microsoft Word's 1.5.
-\linespread{1.424}
+% It sets the line spacing.
+\linespread{1.424} % Microsoft Word's 1.5
 
-% Justify text.
+% It justifies text.
 \tolerance=1
 \emergencystretch=\maxdimen
 \hbadness=10000
 \frenchspacing
 
-% Disable hyphenation.
+% It disables hyphenation.
 \makeatletter
 \template@hyphenation@disable
 \makeatother
-
-
-% Text
 
 % Package csquotes provides \enquote for language-aware quoting.
 % \enquote is used by Pandoc for Quoted when "csquotes" metadata variable is true.
@@ -153,8 +163,62 @@
 
 % Link
 
-% Package cleveref is known to use the "russian" document class option.
+% Package cleveref provides \labelcref for cross-referencing images, tables, etc.
+% Option russian (implicitly set by \documentclass) enables support for Russian.
+% \labelcref is used by writer/gost/internal/link.
 \usepackage{cleveref}
+
+
+% List
+
+% Package enumitem provides commands for styling lists.
+% See https://mirror.koddos.net/CTAN/macros/latex/contrib/enumitem/enumitem.pdf.
+\usepackage{enumitem}
+
+% The commands teach package enumitem the Russian alphabet for ordered lists.
+\makeatletter
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ}
+\AddEnumerateCounter{\Asbuk}{\russian@Alph}{Ж}
+\makeatother
+
+% The command sets common settings for all lists.
+\setlist{labelindent=\parindent,leftmargin=*,listparindent=\parindent,topsep=0pt,partopsep=0pt,parsep=\parskip,itemsep=0pt}
+
+% The command sets additional settings for bullet lists.
+\setlist[itemize]{label={$$\bullet$$}}
+
+% The commands set additional settings for ordered lists.
+% This label style isn't used by the writer, it is to be used by the end user in LaTeX if needed.
+% The writer uses Pandoc's tooling instead to style the label.
+% See writer/gost/internal/list.
+\setlist[enumerate,1]{label={\arabic*)}}
+\setlist[enumerate,2]{label={\asbuk*)}}
+\setlist[enumerate,3]{label={\arabic*)}}
+\setlist[enumerate,4]{label={\asbuk*)}}
+
+% The commands create ordered list with parenthesis labels.
+% The list isn't used by the writer, it is to be used by the end user in LaTeX if needed.
+% The writer uses Pandoc's tooling instead.
+% See writer/gost/internal/list.
+\newlist{enumerateWithParenthesis}{enumerate}{10}
+\setlist[enumerateWithParenthesis,1]{label={\arabic*)}}
+\setlist[enumerateWithParenthesis,2]{label={\asbuk*)}}
+\setlist[enumerateWithParenthesis,3]{label={\arabic*)}}
+\setlist[enumerateWithParenthesis,4]{label={\asbuk*)}}
+
+% The commands create ordered list with period labels.
+% The list isn't used by the writer, it is to be used by the end user in LaTeX if needed.
+% The writer uses Pandoc's tooling instead.
+% See writer/gost/internal/list.
+\newlist{enumerateWithPeriod}{enumerate}{10}
+\setlist[enumerateWithPeriod,1]{label={\arabic*.}}
+\setlist[enumerateWithPeriod,2]{label={\asbuk*.}}
+\setlist[enumerateWithPeriod,3]{label={\arabic*.}}
+\setlist[enumerateWithPeriod,4]{label={\asbuk*.}}
+
+% \tightlist is a no-op command for Pandoc.
+% It is used by Pandoc to render loose and tight lists differently, but we render all lists the same.
+\newcommand{\tightlist}{}
 
 
 % Image

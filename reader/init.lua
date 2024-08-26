@@ -6,6 +6,7 @@ local image = require("reader.internal.image")
 local link = require("reader.internal.link")
 local mth = require("reader.internal.mth")
 local tbl = require("reader.internal.tbl")
+local list = require("reader.internal.list")
 
 ---@param srcs pandoc.Sources
 ---@param opts pandoc.ReaderOptions
@@ -45,6 +46,11 @@ function M.Read(srcs, opts)
 		---@return pandoc.Block
 		Table = function(t)
 			return tbl.ReadFigureFromTable(t, markdownReader)
+		end,
+		---@param ol pandoc.OrderedList
+		---@return pandoc.OrderedList
+		OrderedList = function(ol)
+			return list.ReadOrderedList(ol)
 		end,
 	})
 

@@ -108,6 +108,7 @@ function Block:clone() end
 ---@field content pandoc.Blocks
 ---@field attr pandoc.Attr
 ---@field tag "Div"
+---@field clone fun(self: pandoc.Div): pandoc.Div
 ---@class pandoc.Figure: pandoc.Block
 ---@field content pandoc.Blocks
 ---@field caption pandoc.Caption
@@ -127,6 +128,7 @@ function Block:clone() end
 ---@field content pandoc.List<pandoc.Blocks>
 ---@field listAttributes pandoc.ListAttributes
 ---@field tag "OrderedList"
+---@field clone fun(self: pandoc.OrderedList): pandoc.OrderedList
 ---@class pandoc.Para: pandoc.Block
 ---@field content pandoc.Inlines
 ---@field tag "Para"
@@ -322,6 +324,9 @@ function Inline:clone() end
 
 ---List of key/value pairs. Values can be accessed by using keys as indices to the list table.
 ---Attributes values are equal in Lua if and only if they are equal in Haskell.
+---
+---It is not a simple table, it is a table with repeatable keys.
+---Niling a key can result in a non-nil key.
 ---@alias pandoc.Attributes table<string, string>
 
 ---Column alignment and width specification for a single table column. This is a pair, i.e., a

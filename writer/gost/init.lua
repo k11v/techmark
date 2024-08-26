@@ -8,6 +8,7 @@ local code = require("writer.gost.internal.code")
 local tbl = require("writer.gost.internal.tbl")
 local contents = require("writer.gost.internal.contents")
 local references = require("writer.gost.internal.references")
+local list = require("writer.gost.internal.list")
 
 ---@param doc pandoc.Pandoc
 ---@param opts pandoc.WriterOptions
@@ -20,7 +21,10 @@ function M.Write(doc, opts)
 		---@param d pandoc.Div
 		---@return pandoc.Block
 		Div = function(d)
-			return contents.WriteContentsFromDiv(d) or references.WriteReferencesFromDiv(d) or d
+			return list.WriteOrderedListFromDiv(d)
+				or contents.WriteContentsFromDiv(d)
+				or references.WriteReferencesFromDiv(d)
+				or d
 		end,
 		---@param s pandoc.Span
 		---@return pandoc.Inline
@@ -43,12 +47,12 @@ function M.Write(doc, opts)
 	doc = element.RemoveMerges(doc)
 	doc = element.RemoveRedundants(doc)
 
+	-- Option csquotes depends on package csquotes.
+	doc.meta["csquotes"] = true
+
 	if opts.variables["template_development"] ~= nil and opts.variables["template_development"]:render() == "1" then
 		io.stderr:write(nativeWriter.write(doc))
 	end
-
-	-- Extension csquotes depends on package csquotes.
-	doc.meta["csquotes"] = true
 
 	return latexWriter.write(doc)
 end
