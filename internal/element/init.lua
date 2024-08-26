@@ -169,7 +169,12 @@ end
 ---@param e { attr: pandoc.Attr }
 ---@return nil
 function M.removeSource(e)
-	e.attr.attributes["data-pos"] = nil
+	-- pandoc.Attr.attributes is not a simple table, it is a table with repeatable keys.
+	-- The while loop ensures we remove the key completely.
+	-- In practice Pandoc have produced documents with multiple data-pos attributes.
+	while e.attr.attributes["data-pos"] ~= nil do
+		e.attr.attributes["data-pos"] = nil
+	end
 end
 
 ---RemoveRedundants replaces Divs and Spans that don't have anything on them with their content.
